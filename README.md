@@ -1,10 +1,21 @@
-# Getting Started with Create React App
+# Akkio Colors App
+## Description
+This application fetches all the named color swatches for the Saturation and Lightness percentages supplied by the user as per the HSL value from [the color api](https://www.thecolorapi.com).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Running the app
+This was built using `create-react-app` so you can just run `npm start` in the project directory to run the app locally. You can read more about it [here](#create-react-app-readme).
 
-## Available Scripts
+## Summary
+This application makes 360 fetches (I know 😬) to the color api's color endpoint since we need to supply a hue value (0-359) to grab a named color for a given saturation and lightness. Because we need to fetch _every_ possible color, we have to input every possible hue value to ensure that we don't miss anything.
 
-In the project directory, you can run:
+One of the interesting things the color API does is that it will find the nearest match to the color you're requesting if that value isn't a named color. Because of this, there are duplicate colors being returned and I filtered those out by assigning each color object to a key/value map using the color name as the key.
+
+Of course, making all of these calls isn't ideal and you can feel it with the load times. One of the other options I considered to reduce how often I hit the color API was to wait for the first promise to fulfill, grab the hue value from the returned HSL, increment one up from that, and use that hue for the next call so we could skip _some_ of the redundancy. However since every promise would resolve synchronously, this would be significantly slower than the implementation I have currently.
+
+Bonus: I added a feature that would allow the user to copy the rgb value from whichever color they clicked on.
+
+## Create React App Readme
+This is the leftover readme from the `create-react-app` boilerplate
 
 ### `npm start`
 
@@ -44,27 +55,3 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
