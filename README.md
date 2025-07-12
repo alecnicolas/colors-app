@@ -1,5 +1,6 @@
-# Akkio Colors App
+# Colors App
 ## Description
+*Note*: This application was created as a take-home submission for an interview process.
 This application fetches all the named color swatches for the Saturation and Lightness percentages supplied by the user as per the HSL value from [the color api](https://www.thecolorapi.com).
 
 #### Running the app
